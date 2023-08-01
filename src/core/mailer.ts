@@ -6,7 +6,15 @@ export const EMAIL_SUBJECTS = {
   LOGIN: "Your Photoshot Login Link",
 };
 
-const transporter = nodemailer.createTransport(process.env.EMAIL_SERVER);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'unboringstudios@gmail.com',
+    pass: 'rokas2020'
+  }
+});
+
+// const transporter = nodemailer.createTransport(process.env.EMAIL_SERVER);
 
 export const sendEmail = async ({
   to,

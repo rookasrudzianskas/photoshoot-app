@@ -25,22 +25,32 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const studioName = req.body.studioName as string;
     const instanceClass = req.body.instanceClass as string;
 
-    console.log('Studio name>>>', studioName)
-    console.log('Instance class>>>', instanceClass)
-    console.log('Urls>>>', urls)
-    console.log('Name .>>>>>', process.env.NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN)
-
     const project = await db.project.create({
       data: {
         imageUrls: urls,
         name: studioName,
-        userId: session.userId,
+        // userId: session.userId,
         modelStatus: "not_created",
         instanceClass: instanceClass || "person",
         instanceName: process.env.NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN!,
         credits: Number(process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT) || 50,
       },
     });
+
+    // const user = await prisma.user.create({
+    //   data: {
+    //     name: 'Alice',
+    //     email: 'alice@prisma.io',
+    //   },
+    // })
+
+    // const project = await db.post.create({
+    //   data: {
+    //     title: 'Alice',
+    //     content: 'alice@prisma.io',
+    //     authorId: 2312312,
+    //   },
+    // });
 
     console.log('Success>>>>', project)
 

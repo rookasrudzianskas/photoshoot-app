@@ -28,6 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log('Studio name>>>', studioName)
     console.log('Instance class>>>', instanceClass)
     console.log('Urls>>>', urls)
+    console.log('Name .>>>>>', process.env.NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN)
 
     const project = await db.project.create({
       data: {

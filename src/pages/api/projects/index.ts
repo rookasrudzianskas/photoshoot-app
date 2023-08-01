@@ -7,7 +7,14 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import replicateClient from "@/core/clients/replicate";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req });
+  const session = {
+    userId: 'rokas',
+    user: {
+      email: 'hello@rokas.com',
+      image: 'https://avatars.githubusercontent.com/u/44036562?v=4',
+      name: 'Rokas',
+    }
+  }
 
   if (!session?.user) {
     return res.status(401).json({ message: "Not authenticated" });
@@ -17,6 +24,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const urls = req.body.urls as string[];
     const studioName = req.body.studioName as string;
     const instanceClass = req.body.instanceClass as string;
+
+    console.log('Studio name>>>', studioName)
+    console.log('Instance class>>>', instanceClass)
+    console.log('Urls>>>', urls)
 
     const project = await db.project.create({
       data: {
@@ -29,6 +40,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         credits: Number(process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT) || 50,
       },
     });
+
+    console.log('Success>>>>', project)
 
     const buffer = await createZipFolder(urls, project);
 

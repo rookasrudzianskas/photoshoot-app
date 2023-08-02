@@ -18,7 +18,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 
 
-
   // const session = await getSession({ req });
   //
   // if (!session?.user) {

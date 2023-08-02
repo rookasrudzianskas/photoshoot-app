@@ -9,6 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const seed = req.body.seed as number;
   const image = req.body.image as string;
 
+
   const projectId = req.query.id as string;
   const session = await getSession({ req });
 

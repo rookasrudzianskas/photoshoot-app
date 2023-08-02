@@ -69,7 +69,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "GET") {
     const projects = await db.project.findMany({
-      where: { userId: session.userId },
+      // where: { userId: session.userId },
       include: { shots: { take: 10, orderBy: { createdAt: "desc" } } },
       orderBy: { createdAt: "desc" },
     });

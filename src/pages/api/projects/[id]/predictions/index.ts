@@ -15,7 +15,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('Seed', seed)
   console.log('Image', image)
 
-
   // const session = await getSession({ req });
   //
   // if (!session?.user) {

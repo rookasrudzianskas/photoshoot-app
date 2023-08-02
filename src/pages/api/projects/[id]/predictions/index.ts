@@ -9,16 +9,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const seed = req.body.seed as number;
   const image = req.body.image as string;
 
-
   const projectId = req.query.id as string;
-  const session = await getSession({ req });
+  console.log('projectId>>>>', projectId)
+  console.log('Prompt', prompt)
+  console.log('Seed', seed)
+  console.log('Image', image)
 
-  if (!session?.user) {
-    return res.status(401).json({ message: "Not authenticated" });
-  }
+
+  // const session = await getSession({ req });
+  //
+  // if (!session?.user) {
+  //   return res.status(401).json({ message: "Not authenticated" });
+  // }
 
   const project = await db.project.findFirstOrThrow({
-    where: { id: projectId, userId: session.userId },
+    where: { id: projectId, userId: "rokas" },
   });
 
   if (project.credits < 1) {

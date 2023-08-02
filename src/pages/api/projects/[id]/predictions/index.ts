@@ -8,6 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const prompt = req.body.prompt as string;
   const seed = req.body.seed as number;
   const image = req.body.image as string;
+
   const projectId = req.query.id as string;
   console.log('projectId>>>>', projectId)
   console.log('Prompt', prompt)

@@ -6,18 +6,18 @@ import { getRefinedInstanceClass } from "@/core/utils/predictions";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const projectId = req.query.id as string;
-  // const session = await getSession({ req });
-  //
-  // if (!session?.user) {
-  //   return res.status(401).json({ message: "Not authenticated" });
-  // }
+  const session = await getSession({ req });
+
+  if (!session?.user) {
+    return res.status(401).json({ message: "Not authenticated" });
+  }
 
   let project = await db.project.findFirstOrThrow({
     where: {
-      id: "clks9zs3300009k69krndokuv",
-      // userId: "rokas",
-      // modelStatus: "not_created",
-      // NOT: { stripePaymentId: null },
+      id: projectId,
+      userId: session.userId,
+      modelStatus: "not_created",
+      NOT: { stripePaymentId: null },
     },
   });
 

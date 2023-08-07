@@ -87,39 +87,31 @@ model Project {
 }
 
 model Shot {
-  id             String   @id @default(cuid())
-  prompt         String
-  replicateId    String
-  status         String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  Project        Project? @relation(fields: [projectId], references: [id])
-  projectId      String?
-  outputUrl      String?
-  bookmarked     Boolean? @default(false)
-  blurhash       String?
-  seed           Int?
-  hdStatus       HdStatus @default(NO)
+  id          String   @id @default(cuid())
+  prompt      String
+  replicateId String
+  status      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Project     Project? @relation(fields: [projectId], references: [id])
+  projectId   String?
+  outputUrl   String?
+  bookmarked  Boolean? @default(false)
+  blurhash    String?
+  seed        Int?
+  hdStatus    HdStatus   @default(NO)
   hdPredictionId String?
-  hdOutputUrl    String?
+  hdOutputUrl   String?
 }
 
 model Payment {
-  id              String   @id @default(cuid())
-  type            String
-  status          String
+  id        String   @id @default(cuid())
+  type      String
+  status    String
   stripeSessionId String
-  createdAt       DateTime @default(now())
-  Project         Project? @relation(fields: [projectId], references: [id])
-  projectId       String?
+  createdAt DateTime @default(now())
+  Project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
 
   @@map("payments")
-}
-
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  Int
 }

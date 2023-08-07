@@ -55,7 +55,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   const project = await db.project.findFirstOrThrow({
-    where: { id: projectId, modelStatus: "succeeded" },
+    where: { id: projectId, userId: session.userId, modelStatus: "succeeded" },
     include: {
       _count: {
         select: { shots: true },

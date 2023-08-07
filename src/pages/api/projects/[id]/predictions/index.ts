@@ -24,6 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: "No credit" });
   }
 
+
   const { data } = await replicateClient.post(
     `https://api.replicate.com/v1/predictions`,
     {

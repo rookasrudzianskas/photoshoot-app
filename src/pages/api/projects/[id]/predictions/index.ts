@@ -22,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // }
 
   const project = await db.project.findFirstOrThrow({
-    where: { id: projectId, userId: "rokas" },
+    where: { id: projectId },
   });
 
   if (project.credits < 1) {
@@ -42,6 +42,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   );
 
+  console.log('This is data>>>>', data)
+
   const shot = await db.shot.create({
     data: {
       prompt,
@@ -51,12 +53,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
+  console.log('This is shot>>>>', shot)
+
   await db.project.update({
     where: { id: project.id },
     data: {
       credits: project.credits - 1,
     },
   });
+
+  console.log('This is project>>>>', project)
 
   return res.json({ shot });
 };

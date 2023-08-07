@@ -49,9 +49,9 @@ const PromptPanel = ({
         }),
       {
         onSuccess: (response) => {
-          // addShot(response.data.shot);
-          // promptInputRef.current!.value = "";
-          // setPromptImageUrl(undefined);
+          addShot(response.data.shot);
+          promptInputRef.current!.value = "";
+          setPromptImageUrl(undefined);
         },
       }
     );

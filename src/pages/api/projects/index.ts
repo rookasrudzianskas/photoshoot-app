@@ -7,14 +7,7 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import replicateClient from "@/core/clients/replicate";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = {
-    userId: 'rokas',
-    user: {
-      email: 'hello@rokas.com',
-      image: 'https://avatars.githubusercontent.com/u/44036562?v=4',
-      name: 'Rokas',
-    }
-  }
+  const session = await getSession({ req });
 
   if (!session?.user) {
     return res.status(401).json({ message: "Not authenticated" });
@@ -29,30 +22,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         imageUrls: urls,
         name: studioName,
-        // userId: session.userId,
+        userId: session.userId,
         modelStatus: "not_created",
         instanceClass: instanceClass || "person",
         instanceName: process.env.NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN!,
         credits: Number(process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT) || 50,
       },
     });
-
-    // const user = await prisma.user.create({
-    //   data: {
-    //     name: 'Alice',
-    //     email: 'alice@prisma.io',
-    //   },
-    // })
-
-    // const project = await db.post.create({
-    //   data: {
-    //     title: 'Alice',
-    //     content: 'alice@prisma.io',
-    //     authorId: 2312312,
-    //   },
-    // });
-
-    console.log('Success>>>>', project)
 
     const buffer = await createZipFolder(urls, project);
 
@@ -69,7 +45,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "GET") {
     const projects = await db.project.findMany({
-      // where: { userId: session.userId },
+      where: { userId: session.userId },
       include: { shots: { take: 10, orderBy: { createdAt: "desc" } } },
       orderBy: { createdAt: "desc" },
     });

@@ -8,10 +8,13 @@ export const EMAIL_SUBJECTS = {
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 534,
+  secure: false,
   auth: {
-    user: 'unboringstudios@gmail.com',
-    pass: 'rokas2020'
-  }
+    user: 'rokas.company.test.email@gmail.com',
+    pass: 'bkyqotqcbcxjgmik',
+  },
 });
 
 // const transporter = nodemailer.createTransport(process.env.EMAIL_SERVER);

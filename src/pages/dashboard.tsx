@@ -73,18 +73,18 @@ export default function Home() {
   );
 }
 
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//   const session = await getSession({ req: context.req });
-//
-//   if (!session) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: "/login",
-//       },
-//       props: {},
-//     };
-//   }
-//
-//   return { props: {} };
-// }
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+      props: {},
+    };
+  }
+
+  return { props: {} };
+}

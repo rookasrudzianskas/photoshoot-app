@@ -45,14 +45,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession({ req: context.req });
   const projectId = context.query.id as string;
 
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: "/login",
-  //     },
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
 
   const project = await db.project.findFirstOrThrow({
     where: { id: projectId, modelStatus: "succeeded" },

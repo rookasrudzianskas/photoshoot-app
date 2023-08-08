@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 import { ReactElement } from "react";
 
 export const EMAIL_SUBJECTS = {
-  LOGIN: "Your Photoshot Login Link",
+  LOGIN: "Your Photoshot App Login Link",
 };
 
 const transporter = nodemailer.createTransport({

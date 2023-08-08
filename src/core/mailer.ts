@@ -9,11 +9,11 @@ export const EMAIL_SUBJECTS = {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
-  port: 534,
+  port: 587, // 534
   secure: false,
   auth: {
-    user: process.env.EMAIL_FROM,
-    pass: process.env.EMAIL_PASSWORD
+    user: 'rokas.company.test.email@gmail.com',
+    pass: 'bkyqotqcbcxjgmik',
   },
 });
 

@@ -45,7 +45,6 @@ const ProjectCard = ({
       },
     }
   );
-  
 
   const isWaitingPayment = !project.stripePaymentId;
   const isWaitingTraining =

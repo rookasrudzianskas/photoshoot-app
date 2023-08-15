@@ -21,7 +21,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-
   const instanceClass = getRefinedInstanceClass(project.instanceClass);
 
   const responseReplicate = await replicateClient.post(

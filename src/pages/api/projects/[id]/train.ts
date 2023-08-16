@@ -34,7 +34,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         num_class_images: 200,
         learning_rate: 1e-6,
       },
-      // This is testing point
       // input: {
       //   instance_prompt: `Capture a high-quality image showcasing a ${instanceClass}`,
       //   class_prompt: `Present an illustrative photo representing a ${instanceClass}`,

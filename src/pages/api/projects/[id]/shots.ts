@@ -28,6 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       orderBy: { createdAt: "desc" },
     });
 
+
     return res.json({ shots: project.shots, shotsCount: project._count.shots });
   }
 
